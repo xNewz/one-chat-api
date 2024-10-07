@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+build/
+dist/
+one_chat_api.egg-info/
