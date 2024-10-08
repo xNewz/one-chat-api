@@ -26,4 +26,4 @@ class LocationSender:
         if response.status_code == 200:
             return response.json()
         else:
-            return response.json()  # Return error response for handling
+            return response.json()
