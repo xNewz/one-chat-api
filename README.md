@@ -74,6 +74,18 @@ response = send_message(message="Hello One!")
 print("Send Message response:", response)
 ```
 
+### Send Files
+
+You can send a file to a specific user or group
+
+```python
+response = send_file(file_path="results.csv")
+print("Send File response:", response)
+```
+
+> [!TIP]
+> You can now send images using the send_file function, making it easier to share media files with your users!
+
 ### Broadcast Messages
 
 To send a message to multiple recipients
@@ -126,9 +138,6 @@ def main():
     # Send a file
     resp_file = send_file(file_path="results.csv")
     print("Send File response:", resp_file)
-
-    > [!TIP]
-    > You can now send images using the send_file function, making it easier to share media files with your users!
 
     # Broadcast a message to multiple users
     resp_msg_multi = broadcast_message(message="Hello Multi!", to=["USER_ID_1", "USER_ID_2"])
