@@ -28,7 +28,10 @@ jobs:
         run: |
           python -m build  # Build source and wheel distributions
 
-      - name: Upload the distribution as artifact (optional, for review purposes)
+      - name: List files in dist directory  # ตรวจสอบว่าไฟล์ถูกสร้าง
+        run: ls -alh dist/
+
+      - name: Upload the distribution as artifact (optional)
         uses: actions/upload-artifact@v4
         with:
           name: python-package-distributions
@@ -36,7 +39,7 @@ jobs:
 
   publish:
     name: Publish Python Package to PyPI
-    needs: build  # Ensure that the package is built first
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Download distribution packages
