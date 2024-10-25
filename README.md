@@ -7,6 +7,7 @@ The OneChat Python library provides an interface for sending messages, broadcast
 ### Features
 
 - Send Messages: Send messages to individual users or groups.
+- Send Files: Added support for sending files via form-data to allow seamless file transfers to users.
 - Broadcast Messages: Send messages to multiple recipients at once.
 - Send Locations: Share geographical locations with users.
 - Send Stickers: Send sticker messages to users.
