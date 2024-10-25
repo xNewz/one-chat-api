@@ -1,4 +1,4 @@
-name: One Chat API
+name: Python Build and Publish to PyPI
 
 on:
   push:
