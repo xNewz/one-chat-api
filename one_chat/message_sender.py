@@ -2,6 +2,7 @@
 
 import requests
 import json
+import re
 
 
 class MessageSender:
@@ -39,13 +40,15 @@ class MessageSender:
 
         headers = {k: v for k, v in self.headers.items() if k.lower() != "content-type"}
 
-        with open(file_path, 'rb') as file:
+        with open(file_path, "rb") as file:
             files = {
                 "file": (file_path, file),
             }
 
             try:
-                response = requests.post(self.base_url, headers=headers, data=data, files=files)
+                response = requests.post(
+                    self.base_url, headers=headers, data=data, files=files
+                )
 
                 if response.status_code == 200:
                     return response.json()
@@ -57,6 +60,12 @@ class MessageSender:
                 return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def send_webview(self, to, bot_id, url, custom_notification=None):
+        if not re.match(r"^(http|https)://", url):
+            return {
+                "status": "fail",
+                "message": "Please specify a protocol (http or https) in the URL.",
+            }
+
         payload = {
             "to": to,
             "bot_id": bot_id,
