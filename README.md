@@ -10,11 +10,11 @@ The OneChat Python library provides an interface for sending messages, broadcast
 - Broadcast Messages: Send messages to multiple recipients at once.
 - Send Locations: Share geographical locations with users.
 - Send Stickers: Send sticker messages to users.
-- Get Friends and Groups: Get a list of friends and groups.
-- Get All Friends: Get a list of all friends.
-- Get One ID of Friend: Get the One ID of a friend.
-- Get All Groups: Get a list of all groups.
-- Get Group ID of Group: Get the group ID of a group.
+- Fetch Friends and Groups: Retrieve the complete list of friends and groups for a bot.
+- List All Friends: Get a list of all friends associated with the bot.
+- List Friend IDs: Retrieve the One IDs of all friends for easy identification.
+- List All Groups: Get a list of all groups associated with the bot.
+- List Group IDs: Retrieve the IDs of all groups for further actions.
 
 ## Installation
 
