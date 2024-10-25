@@ -2,7 +2,7 @@
 
 ## Overview
 
-The OneChat Python library provides an interface for sending messages, broadcasting messages to multiple users, sending location information, and sending stickers through the OneChat API.
+The OneChat Python library provides an interface for sending messages, broadcasting messages to multiple users, sending location information, sending stickers, and sending files through the OneChat API.
 
 ### Features
 
