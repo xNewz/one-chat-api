@@ -87,6 +87,15 @@ print("Send File response:", response)
 > [!TIP]
 > You can now send images using the send_file function, making it easier to share media files with your users!
 
+### Send WebView
+```python
+response = send_webview(url="https://google.com/")
+print("Send Webview response:", response)
+```
+
+> [!IMPORTANT]
+> You need to specify the Protocol (http:// or https://) in the URL
+
 ### Broadcast Messages
 
 To send a message to multiple recipients
@@ -139,6 +148,10 @@ def main():
     # Send a file
     resp_file = send_file(file_path="results.csv")
     print("Send File response:", resp_file)
+
+    # Send a webview
+    resp_webview = send_webview(url="https://google.com/")
+    print("Send Webview response:", resp_webview)
 
     # Broadcast a message to multiple users
     resp_msg_multi = broadcast_message(message="Hello Multi!", to=["USER_ID_1", "USER_ID_2"])
