@@ -35,6 +35,7 @@ To use the OneChat library, follow these steps
 from one_chat import (
     init,
     send_message,
+    send_file,
     broadcast_message,
     send_location,
     send_sticker,
@@ -121,6 +122,13 @@ def main():
     # Send a single message
     resp_msg = send_message(message="Hello One!")
     print("Send Message response:", resp_msg)
+
+    # Send a file
+    resp_file = send_file(file_path="results.csv")
+    print("Send File response:", resp_file)
+
+    > [!TIP]
+    > You can now send images using the send_file function, making it easier to share media files with your users!
 
     # Broadcast a message to multiple users
     resp_msg_multi = broadcast_message(message="Hello Multi!", to=["USER_ID_1", "USER_ID_2"])
