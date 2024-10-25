@@ -1,18 +1,14 @@
-name: Python Build and Publish
+name: Python Build and Publish to PyPI
 
 on:
   push:
     tags:
-      - 'v*'  # Trigger เมื่อ push tag ที่ขึ้นต้นด้วย 'v'
-  workflow_dispatch:  # ให้สามารถ run manual ได้ผ่าน GitHub UI
+      - 'v*'  # Trigger on version tags (e.g., v1.0.0)
 
 jobs:
   build:
     name: Build and Test Python
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write  # ให้สิทธิ์ในการใช้ OpenID Connect token
-      contents: read    # ให้สิทธิ์ในการอ่าน repository contents
 
     steps:
       - name: Checkout repository
@@ -26,39 +22,35 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install build twine  # ติดตั้ง build tools
+          python -m pip install build twine  # Install necessary tools
 
       - name: Build the distribution
         run: |
-          python -m build  # สร้างแพ็กเกจในโฟลเดอร์ dist/
+          python -m build  # Build source and wheel distributions
 
-      - name: List files in dist directory  # ตรวจสอบไฟล์ในโฟลเดอร์ dist
+      - name: List files in dist directory  # ตรวจสอบว่าไฟล์ถูกสร้าง
         run: ls -alh dist/
 
+      - name: Upload the distribution as artifact (optional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
   publish:
-    name: Publish Python Package
+    name: Publish Python Package to PyPI
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write  # ให้สิทธิ์ในการใช้ OpenID Connect token
-      contents: read    # ให้สิทธิ์ในการอ่าน repository contents
-
     steps:
       - name: Download distribution packages
         uses: actions/download-artifact@v4
         with:
           name: python-package-distributions
 
-      - name: Publish to PyPI or TestPyPI
+      - name: Publish to PyPI
         run: |
           python -m pip install --upgrade twine
-          if [[ "${{ inputs.publish_to }}" == 'pypi' ]]; then
-            echo "Publishing to PyPI..."
-            twine upload dist/*
-          else
-            echo "Publishing to TestPyPI..."
-            twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-          fi
+          twine upload dist/*
         env:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
