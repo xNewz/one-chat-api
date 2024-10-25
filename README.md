@@ -37,11 +37,11 @@ from one_chat import (
     broadcast_message,
     send_location,
     send_sticker,
-    get_friends_and_group,
-    get_all_friends,
-    get_one_id_of_friend,
-    get_all_groups,
-    get_group_id_of_group,
+    fetch_friends_and_groups,
+    list_all_friends,
+    list_friend_ids,
+    list_all_groups,
+    list_group_ids,
 )
 ```
 
@@ -134,23 +134,23 @@ def main():
     print("Send Sticker Response:", resp_sticker)
 
     # Get a list of friends and groups
-    friends_and_groups = get_friends_and_group() # you can use get_friends_and_group("BOT_ID") to get friends and groups of another bot
+    friends_and_groups = fetch_friends_and_groups() # you can use fetch_friends_and_groups("BOT_ID") to get friends and groups of another bot
     print("Friends and Groups:", friends_and_groups)
 
     # Get a list of friends
-    friends = get_all_friends() # you can use get_all_friends("BOT_ID") to get friends of another bot
+    friends = list_all_friends() # you can use list_all_friends("BOT_ID") to get friends of another bot
     print("Friends:", friends)
 
     # Get the One ID of a friend
-    one_id = get_one_id_of_friend() # you can use get_one_id_of_friend("BOT_ID") to get one id of a friend of another bot
+    one_id = list_friend_ids() # you can use list_friend_ids("BOT_ID") to get one id of a friend of another bot
     print("One ID of Friend:", one_id)
 
     # Get a list of groups
-    groups = get_all_groups() # you can use get_all_groups("BOT_ID") to get groups of another bot
+    groups = list_all_groups() # you can use list_all_groups("BOT_ID") to get groups of another bot
     print("Groups:", groups)
 
     # Get the group ID of a group
-    group_id = get_group_id_of_group() # you can use get_group_id_of_group("BOT_ID") to get group id of a group of another bot
+    group_id = list_group_ids() # you can use list_group_ids("BOT_ID") to get group id of a group of another bot
     print("Group ID of Group:", group_id)
 
 if __name__ == "__main__":

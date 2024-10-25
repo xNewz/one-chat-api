@@ -81,7 +81,7 @@ def send_sticker(to=None, bot_id=None, sticker_id=None, custom_notification=None
 
     return one_chat_instance.send_sticker(to, bot_id, sticker_id, custom_notification)
 
-def get_friends_and_group(bot_id=None):
+def fetch_friends_and_groups(bot_id=None):
     if one_chat_instance is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -94,9 +94,9 @@ def get_friends_and_group(bot_id=None):
             "Bot ID must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.get_friends_and_group(bot_id)
+    return one_chat_instance.fetch_friends_and_groups(bot_id)
 
-def get_all_friends(bot_id=None):
+def list_all_friends(bot_id=None):
     if one_chat_instance is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -109,9 +109,9 @@ def get_all_friends(bot_id=None):
             "Bot ID must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.get_all_friends(bot_id)
+    return one_chat_instance.list_all_friends(bot_id)
 
-def get_one_id_of_friend(bot_id=None):
+def list_friend_ids(bot_id=None):
     if one_chat_instance is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -124,9 +124,9 @@ def get_one_id_of_friend(bot_id=None):
             "Bot ID must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.get_one_id_of_friend(bot_id)
+    return one_chat_instance.list_friend_ids(bot_id)
 
-def get_all_groups(bot_id=None):
+def list_all_groups(bot_id=None):
     if one_chat_instance is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -139,9 +139,9 @@ def get_all_groups(bot_id=None):
             "Bot ID must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.get_all_groups(bot_id)
+    return one_chat_instance.list_all_groups(bot_id)
 
-def get_group_id_of_group(bot_id=None):
+def list_group_ids(bot_id=None):
     if one_chat_instance is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -154,4 +154,4 @@ def get_group_id_of_group(bot_id=None):
             "Bot ID must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.get_group_id_of_group(bot_id)
+    return one_chat_instance.list_group_ids(bot_id)
