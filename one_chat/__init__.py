@@ -47,6 +47,22 @@ def send_file(to=None, bot_id=None, file_path=None, custom_notification=None):
 
     return one_chat_instance.send_file(to, bot_id, file_path, custom_notification)
 
+def send_webview(to=None, bot_id=None, url=None, custom_notification=None):
+    if one_chat_instance is None:
+        raise Exception(
+            "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
+        )
+
+    to = to or default_to
+    bot_id = bot_id or default_bot_id
+
+    if not to or not bot_id:
+        raise ValueError(
+            "Both 'to' and 'bot_id' must be provided either during initialization or when calling this method."
+        )
+
+    return one_chat_instance.send_webview(to, bot_id, url, custom_notification)
+
 
 def broadcast_message(bot_id=None, to=None, message=None):
     if one_chat_instance is None:

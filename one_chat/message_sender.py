@@ -56,6 +56,27 @@ class MessageSender:
             except requests.exceptions.RequestException as e:
                 return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
+    def send_webview(self, to, bot_id, url, custom_notification=None):
+        payload = {
+            "to": to,
+            "bot_id": bot_id,
+            "type": "web",
+            "url": url,
+        }
+
+        if custom_notification:
+            payload["custom_notification"] = custom_notification
+
+        try:
+            response = requests.post(self.base_url, headers=self.headers, json=payload)
+
+            if response.status_code == 200:
+                return response.json()
+            else:
+                return self._handle_error(response)
+        except requests.exceptions.RequestException as e:
+            return {"status": "fail", "message": f"Request failed: {str(e)}"}
+
     def _handle_error(self, response):
         try:
             error_response = response.json()
