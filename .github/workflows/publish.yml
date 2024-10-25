@@ -3,7 +3,7 @@ name: One Chat API
 on:
   push:
     tags:
-      - 'v*'  # Trigger on version tags
+      - "v*" # Trigger on version tags
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install build dependencies
         run: python -m pip install --upgrade pip build
@@ -36,6 +36,8 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: pypi
     steps:
       - name: Download distribution packages
         uses: actions/download-artifact@v4
@@ -45,11 +47,15 @@ jobs:
 
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
 
   publish-to-testpypi:
     name: Publish One Chat API 📦 to TestPyPI
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: testpypi
     steps:
       - name: Download distribution packages
         uses: actions/download-artifact@v4
@@ -61,3 +67,4 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
