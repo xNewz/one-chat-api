@@ -1,0 +1,53 @@
+name: Python Build and Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger on version tags (e.g., v1.0.0)
+
+jobs:
+  build:
+    name: Build and Test Python
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build twine  # Install necessary tools
+
+      - name: Build the distribution
+        run: |
+          python -m build  # Build source and wheel distributions
+
+      - name: Upload the distribution as artifact (optional, for review purposes)
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
+  publish:
+    name: Publish Python Package to PyPI
+    needs: build  # Ensure that the package is built first
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download distribution packages
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+
+      - name: Publish to PyPI
+        run: |
+          python -m pip install --upgrade twine
+          twine upload dist/*
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
