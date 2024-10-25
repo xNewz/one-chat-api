@@ -27,6 +27,35 @@ class MessageSender:
         except requests.exceptions.RequestException as e:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
+    def send_file(self, to, bot_id, file_path, custom_notification=None):
+        data = {
+            "to": to,
+            "bot_id": bot_id,
+            "type": "file",
+        }
+
+        if custom_notification:
+            data["custom_notification"] = custom_notification
+
+        headers = {k: v for k, v in self.headers.items() if k.lower() != "content-type"}
+
+        with open(file_path, 'rb') as file:
+            files = {
+                "file": (file_path, file),
+            }
+
+            try:
+                response = requests.post(self.base_url, headers=headers, data=data, files=files)
+
+                if response.status_code == 200:
+                    return response.json()
+                else:
+                    print(f"Response Status: {response.status_code}")
+                    print(f"Response Content: {response.content}")
+                    return self._handle_error(response)
+            except requests.exceptions.RequestException as e:
+                return {"status": "fail", "message": f"Request failed: {str(e)}"}
+
     def _handle_error(self, response):
         try:
             error_response = response.json()

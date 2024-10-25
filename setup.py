@@ -9,7 +9,7 @@ except FileNotFoundError:
 
 setup(
     name='one-chat-api',  # ชื่อ package
-    version='0.2.11',  # เวอร์ชันของ package
+    version='0.2.12',  # เวอร์ชันของ package
     description='Sending messages through One Chat API',
     long_description=long_description,  # รายละเอียดยาว
     long_description_content_type="text/markdown",  # ประเภทของเนื้อหาคำอธิบายยาว

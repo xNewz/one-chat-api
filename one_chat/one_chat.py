@@ -17,6 +17,9 @@ class OneChat:
     def send_message(self, to, bot_id, message, custom_notification=None):
         return self.message_sender.send_message(to, bot_id, message, custom_notification)
 
+    def send_file(self, to, bot_id, file_path, custom_notification=None):
+        return self.message_sender.send_file(to, bot_id, file_path, custom_notification)
+
     def broadcast_message(self, bot_id, to, message):
         return self.broadcast_sender.broadcast_message(bot_id, to, message)
 
