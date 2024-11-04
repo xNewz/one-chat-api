@@ -22,7 +22,7 @@ class MessageSender:
             response = requests.post(self.base_url, headers=self.headers, json=payload)
 
             if response.status_code == 200:
-                return response.json()
+                return json.dumps(response.json(), indent=4)
             else:
                 return self._handle_error(response)
         except requests.exceptions.RequestException as e:
@@ -51,7 +51,7 @@ class MessageSender:
                 )
 
                 if response.status_code == 200:
-                    return response.json()
+                    return json.dumps(response.json(), indent=4)
                 else:
                     print(f"Response Status: {response.status_code}")
                     print(f"Response Content: {response.content}")
@@ -80,7 +80,7 @@ class MessageSender:
             response = requests.post(self.base_url, headers=self.headers, json=payload)
 
             if response.status_code == 200:
-                return response.json()
+                return json.dumps(response.json(), indent=4)
             else:
                 return self._handle_error(response)
         except requests.exceptions.RequestException as e:

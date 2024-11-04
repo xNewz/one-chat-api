@@ -18,7 +18,7 @@ class FriendAndGroupManager:
             response = requests.post(self.base_url, headers=self.headers, json=payload)
 
             if response.status_code == 200:
-                return response.json()
+                return json.dumps(response.json(), indent=4)
             else:
                 return self._handle_error(response)
         except requests.exceptions.RequestException as e:
@@ -26,36 +26,36 @@ class FriendAndGroupManager:
 
     def list_all_friends(self, bot_id):
         try:
-            response = self.fetch_friends_and_groups(bot_id)
+            response = json.loads(self.fetch_friends_and_groups(bot_id))
             if response.get("status") == "success":
-                return response.get("list_friend", [])
+                return json.dumps(response.get("list_friend", []), indent=4)
             return []
         except requests.exceptions.RequestException as e:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def list_friend_ids(self, bot_id):
         try:
-            response = self.fetch_friends_and_groups(bot_id)
+            response = json.loads(self.fetch_friends_and_groups(bot_id))
             if response.get("status") == "success":
-                return [friend["one_id"] for friend in response.get("list_friend", [])]
+                return json.dumps([friend["one_id"] for friend in response.get("list_friend", [])], indent=4)
             return []
         except requests.exceptions.RequestException as e:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def list_all_groups(self, bot_id):
         try:
-            response = self.fetch_friends_and_groups(bot_id)
+            response = json.loads(self.fetch_friends_and_groups(bot_id))
             if response.get("status") == "success":
-                return response.get("list_group", [])
+                return json.dumps(response.get("list_group", []), indent=4)
             return []
         except requests.exceptions.RequestException as e:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def list_group_ids(self, bot_id):
         try:
-            response = self.fetch_friends_and_groups(bot_id)
+            response = json.loads(self.fetch_friends_and_groups(bot_id))
             if response.get("status") == "success":
-                return [group["group_id"] for group in response.get("list_group", [])]
+                return json.dumps([group["group_id"] for group in response.get("list_group", [])], indent=4)
             return []
         except requests.exceptions.RequestException as e:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
