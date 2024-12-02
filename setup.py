@@ -9,7 +9,7 @@ except FileNotFoundError:
 
 setup(
     name="one-chat-api",  # ชื่อ package
-    version="0.2.15",  # เวอร์ชันของ package
+    version="0.2.16",  # เวอร์ชันของ package
     description="The OneChat Python library provides an interface for sending messages, broadcasting messages to multiple users, sending location information, sending stickers, and sending files through the OneChat API.",
     long_description=long_description,  # รายละเอียดยาว
     long_description_content_type="text/markdown",  # ประเภทของเนื้อหาคำอธิบายยาว

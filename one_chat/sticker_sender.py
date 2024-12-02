@@ -5,11 +5,13 @@ import json
 
 
 class StickerSender:
-    def __init__(self, authorization_token):
+    def __init__(self, authorization_token: str):
         self.authorization_token = authorization_token
         self.api_url = "https://chat-api.one.th/message/api/v1/push_message"
 
-    def send_sticker(self, to, bot_id, sticker_id, custom_notification=None):
+    def send_sticker(
+        self, to: str, bot_id: str, sticker_id: str, custom_notification: str = None
+    ) -> dict:
         headers = {
             "Authorization": f"Bearer {self.authorization_token}",
             "Content-Type": "application/json",

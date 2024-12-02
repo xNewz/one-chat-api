@@ -2,203 +2,221 @@
 
 from .one_chat import OneChat
 
-one_chat_instance = None
-default_to = None
-default_bot_id = None
+ONE_CHAT_INSTANCE = None
+DEFAULT_TO = None
+DEFAULT_BOT_ID = None
 
 
-def init(authorization_token, to=None, bot_id=None):
-    global one_chat_instance, default_to, default_bot_id
-    one_chat_instance = OneChat(authorization_token)
-    default_to = to
-    default_bot_id = bot_id
+def init(authorization_token: str, to: str = None, bot_id: str = None):
+    global ONE_CHAT_INSTANCE, DEFAULT_TO, DEFAULT_BOT_ID
+    ONE_CHAT_INSTANCE = OneChat(authorization_token)
+    DEFAULT_TO = to
+    DEFAULT_BOT_ID = bot_id
 
 
-def send_message(to=None, bot_id=None, message=None, custom_notification=None):
-    if one_chat_instance is None:
+def send_message(
+    to: str = None,
+    bot_id: str = None,
+    message: str = None,
+    custom_notification: str = None,
+):
+    if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
         )
 
-    to = to or default_to
-    bot_id = bot_id or default_bot_id
+    to = to or DEFAULT_TO
+    bot_id = bot_id or DEFAULT_BOT_ID
 
     if not to or not bot_id:
         raise ValueError(
             "Both 'to' and 'bot_id' must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.send_message(to, bot_id, message, custom_notification)
+    return ONE_CHAT_INSTANCE.send_message(to, bot_id, message, custom_notification)
 
 
-def send_file(to=None, bot_id=None, file_path=None, custom_notification=None):
-    if one_chat_instance is None:
+def send_file(
+    to: str = None,
+    bot_id: str = None,
+    file_path: str = None,
+    custom_notification: str = None,
+):
+    if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
         )
 
-    to = to or default_to
-    bot_id = bot_id or default_bot_id
+    to = to or DEFAULT_TO
+    bot_id = bot_id or DEFAULT_BOT_ID
 
     if not to or not bot_id:
         raise ValueError(
             "Both 'to' and 'bot_id' must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.send_file(to, bot_id, file_path, custom_notification)
+    return ONE_CHAT_INSTANCE.send_file(to, bot_id, file_path, custom_notification)
 
-def send_webview(to=None, bot_id=None, url=None, custom_notification=None):
-    if one_chat_instance is None:
+
+def send_webview(
+    to: str = None, bot_id: str = None, url: str = None, custom_notification: str = None
+):
+    if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
         )
 
-    to = to or default_to
-    bot_id = bot_id or default_bot_id
+    to = to or DEFAULT_TO
+    bot_id = bot_id or DEFAULT_BOT_ID
 
     if not to or not bot_id:
         raise ValueError(
             "Both 'to' and 'bot_id' must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.send_webview(to, bot_id, url, custom_notification)
+    return ONE_CHAT_INSTANCE.send_webview(to, bot_id, url, custom_notification)
 
 
-def broadcast_message(bot_id=None, to=None, message=None):
-    if one_chat_instance is None:
+def broadcast_message(bot_id: str = None, to: str = None, message: str = None):
+    if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
         )
 
-    to = to or default_to
-    bot_id = bot_id or default_bot_id
+    to = to or DEFAULT_TO
+    bot_id = bot_id or DEFAULT_BOT_ID
 
     if not to or not bot_id:
         raise ValueError(
             "Both 'to' and 'bot_id' must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.broadcast_message(bot_id, [to], message)
+    return ONE_CHAT_INSTANCE.broadcast_message(bot_id, [to], message)
 
 
 def send_location(
-    to=None,
-    bot_id=None,
-    latitude=None,
-    longitude=None,
-    address=None,
-    custom_notification=None,
+    to: str = None,
+    bot_id: str = None,
+    latitude: str = None,
+    longitude: str = None,
+    address: str = None,
+    custom_notification: str = None,
 ):
-    if one_chat_instance is None:
+    if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
         )
 
-    to = to or default_to
-    bot_id = bot_id or default_bot_id
+    to = to or DEFAULT_TO
+    bot_id = bot_id or DEFAULT_BOT_ID
 
     if not to or not bot_id:
         raise ValueError(
             "Both 'to' and 'bot_id' must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.send_location(
+    return ONE_CHAT_INSTANCE.send_location(
         to, bot_id, latitude, longitude, address, custom_notification
     )
 
 
-def send_sticker(to=None, bot_id=None, sticker_id=None, custom_notification=None):
-    if one_chat_instance is None:
+def send_sticker(
+    to: str = None,
+    bot_id: str = None,
+    sticker_id: str = None,
+    custom_notification: str = None,
+):
+    if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
         )
 
-    to = to or default_to
-    bot_id = bot_id or default_bot_id
+    to = to or DEFAULT_TO
+    bot_id = bot_id or DEFAULT_BOT_ID
 
     if not to or not bot_id:
         raise ValueError(
             "Both 'to' and 'bot_id' must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.send_sticker(to, bot_id, sticker_id, custom_notification)
+    return ONE_CHAT_INSTANCE.send_sticker(to, bot_id, sticker_id, custom_notification)
 
 
-def fetch_friends_and_groups(bot_id=None):
-    if one_chat_instance is None:
+def fetch_friends_and_groups(bot_id: str = None):
+    if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
         )
 
-    bot_id = bot_id or default_bot_id
+    bot_id = bot_id or DEFAULT_BOT_ID
 
     if not bot_id:
         raise ValueError(
             "Bot ID must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.fetch_friends_and_groups(bot_id)
+    return ONE_CHAT_INSTANCE.fetch_friends_and_groups(bot_id)
 
 
-def list_all_friends(bot_id=None):
-    if one_chat_instance is None:
+def list_all_friends(bot_id: str = None):
+    if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
         )
 
-    bot_id = bot_id or default_bot_id
+    bot_id = bot_id or DEFAULT_BOT_ID
 
     if not bot_id:
         raise ValueError(
             "Bot ID must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.list_all_friends(bot_id)
+    return ONE_CHAT_INSTANCE.list_all_friends(bot_id)
 
 
-def list_friend_ids(bot_id=None):
-    if one_chat_instance is None:
+def list_friend_ids(bot_id: str = None):
+    if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
         )
 
-    bot_id = bot_id or default_bot_id
+    bot_id = bot_id or DEFAULT_BOT_ID
 
     if not bot_id:
         raise ValueError(
             "Bot ID must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.list_friend_ids(bot_id)
+    return ONE_CHAT_INSTANCE.list_friend_ids(bot_id)
 
 
-def list_all_groups(bot_id=None):
-    if one_chat_instance is None:
+def list_all_groups(bot_id: str = None):
+    if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
         )
 
-    bot_id = bot_id or default_bot_id
+    bot_id = bot_id or DEFAULT_BOT_ID
 
     if not bot_id:
         raise ValueError(
             "Bot ID must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.list_all_groups(bot_id)
+    return ONE_CHAT_INSTANCE.list_all_groups(bot_id)
 
 
-def list_group_ids(bot_id=None):
-    if one_chat_instance is None:
+def list_group_ids(bot_id: str = None):
+    if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
         )
 
-    bot_id = bot_id or default_bot_id
+    bot_id = bot_id or DEFAULT_BOT_ID
 
     if not bot_id:
         raise ValueError(
             "Bot ID must be provided either during initialization or when calling this method."
         )
 
-    return one_chat_instance.list_group_ids(bot_id)
+    return ONE_CHAT_INSTANCE.list_group_ids(bot_id)

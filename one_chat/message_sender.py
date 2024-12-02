@@ -6,14 +6,16 @@ import re
 
 
 class MessageSender:
-    def __init__(self, authorization_token):
+    def __init__(self, authorization_token: str):
         self.base_url = "https://chat-api.one.th/message/api/v1/push_message"
         self.headers = {
             "Authorization": f"Bearer {authorization_token}",
             "Content-Type": "application/json",
         }
 
-    def send_message(self, to, bot_id, message, custom_notification=None):
+    def send_message(
+        self, to: str, bot_id: str, message: str, custom_notification: str = None
+    ) -> dict:
         payload = {"to": to, "bot_id": bot_id, "type": "text", "message": message}
         if custom_notification:
             payload["custom_notification"] = custom_notification
@@ -28,7 +30,9 @@ class MessageSender:
         except requests.exceptions.RequestException as e:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
-    def send_file(self, to, bot_id, file_path, custom_notification=None):
+    def send_file(
+        self, to: str, bot_id: str, file_path: str, custom_notification: str = None
+    ) -> dict:
         data = {
             "to": to,
             "bot_id": bot_id,
@@ -59,7 +63,9 @@ class MessageSender:
             except requests.exceptions.RequestException as e:
                 return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
-    def send_webview(self, to, bot_id, url, custom_notification=None):
+    def send_webview(
+        self, to: str, bot_id: str, url: str, custom_notification: str = None
+    ):
         if not re.match(r"^(http|https)://", url):
             return {
                 "status": "fail",
@@ -86,7 +92,7 @@ class MessageSender:
         except requests.exceptions.RequestException as e:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
-    def _handle_error(self, response):
+    def _handle_error(self, response: requests.Response) -> dict:
         try:
             error_response = response.json()
             return {
