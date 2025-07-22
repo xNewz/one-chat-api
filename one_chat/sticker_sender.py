@@ -6,6 +6,8 @@ import json
 
 class StickerSender:
     def __init__(self, authorization_token: str):
+        if authorization_token.startswith("Bearer "):
+            authorization_token = authorization_token.replace("Bearer ", "", 1)
         self.authorization_token = authorization_token
         self.api_url = "https://chat-api.one.th/message/api/v1/push_message"
 

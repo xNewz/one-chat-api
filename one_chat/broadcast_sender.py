@@ -6,9 +6,12 @@ import json
 
 class BroadcastSender:
     def __init__(self, authorization_token: str):
+        if authorization_token.startswith("Bearer "):
+            authorization_token = authorization_token.replace("Bearer ", "", 1)
+        self.authorization_token = authorization_token
         self.base_url = "https://chat-api.one.th/bc_msg/api/v1/broadcast_group"
         self.headers = {
-            "Authorization": f"Bearer {authorization_token}",
+            "Authorization": f"Bearer {self.authorization_token}",
             "Content-Type": "application/json",
         }
 
