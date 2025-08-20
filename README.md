@@ -202,6 +202,7 @@ response = send_image_carousel(
 print("Send Image Carousel Response:", response)
 ```
 
+> [!TIP]
 > You can read more about image carousel messages in the OneChat API documentation.
 > [Click here](https://chat-develop.one.th/develop/docs/carouselimage/aboutimagecarousel)
 
