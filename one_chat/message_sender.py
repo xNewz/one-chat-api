@@ -33,6 +33,23 @@ class MessageSender:
         except requests.exceptions.RequestException as e:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
+    def send_template(
+        self, to: str, bot_id: str, template: list, custom_notification: str = None
+    ) -> dict:
+        payload = {"to": to, "bot_id": bot_id, "type": "template", "elements": template}
+        if custom_notification:
+            payload["custom_notification"] = custom_notification
+
+        try:
+            response = requests.post(self.base_url, headers=self.headers, json=payload)
+
+            if response.status_code == 200:
+                return json.dumps(response.json(), indent=4)
+            else:
+                return self._handle_error(response)
+        except requests.exceptions.RequestException as e:
+            return {"status": "fail", "message": f"Request failed: {str(e)}"}
+
     def send_file(
         self, to: str, bot_id: str, file_path: str, custom_notification: str = None
     ) -> dict:

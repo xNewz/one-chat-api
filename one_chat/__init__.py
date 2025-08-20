@@ -36,6 +36,28 @@ def send_message(
     return ONE_CHAT_INSTANCE.send_message(to, bot_id, message, custom_notification)
 
 
+def send_template(
+    to: str = None,
+    bot_id: str = None,
+    template: list = None,
+    custom_notification: str = None,
+):
+    if ONE_CHAT_INSTANCE is None:
+        raise Exception(
+            "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
+        )
+
+    to = to or DEFAULT_TO
+    bot_id = bot_id or DEFAULT_BOT_ID
+
+    if not to or not bot_id:
+        raise ValueError(
+            "Both 'to' and 'bot_id' must be provided either during initialization or when calling this method."
+        )
+
+    return ONE_CHAT_INSTANCE.send_template(to, bot_id, template, custom_notification)
+
+
 def send_file(
     to: str = None,
     bot_id: str = None,
@@ -141,6 +163,49 @@ def send_sticker(
 
     return ONE_CHAT_INSTANCE.send_sticker(to, bot_id, sticker_id, custom_notification)
 
+
+def send_quickreply(
+    to: str = None,
+    bot_id: str  = None,
+    message: str = None,
+    quick_reply: list = None,
+    custom_notification: str = None,
+):
+    if ONE_CHAT_INSTANCE is None:
+        raise Exception(
+            "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
+        )
+
+    to = to or DEFAULT_TO
+    bot_id = bot_id or DEFAULT_BOT_ID
+
+    if not to or not bot_id:
+        raise ValueError(
+            "Both 'to' and 'bot_id' must be provided either during initialization or when calling this method."
+        )
+
+    return ONE_CHAT_INSTANCE.send_quickreply(to, bot_id, message, quick_reply, custom_notification)
+
+def send_image_carousel(
+    to: str = None,
+    bot_id: str  = None,
+    elements: list = None,
+    custom_notification: str = None,
+):
+    if ONE_CHAT_INSTANCE is None:
+        raise Exception(
+            "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
+        )
+
+    to = to or DEFAULT_TO
+    bot_id = bot_id or DEFAULT_BOT_ID
+
+    if not to or not bot_id:
+        raise ValueError(
+            "Both 'to' and 'bot_id' must be provided either during initialization or when calling this method."
+        )
+
+    return ONE_CHAT_INSTANCE.send_image_carousel(to, bot_id, elements, custom_notification)
 
 def fetch_friends_and_groups(bot_id: str = None):
     if ONE_CHAT_INSTANCE is None:

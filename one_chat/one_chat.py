@@ -4,6 +4,8 @@ from .message_sender import MessageSender
 from .broadcast_sender import BroadcastSender
 from .location_sender import LocationSender
 from .sticker_sender import StickerSender
+from .quickreply_sender import QuickReplySender
+from .image_carousel_sender import ImageCarouselSender
 from .get_friends_and_groups import FriendAndGroupManager
 
 
@@ -13,6 +15,8 @@ class OneChat:
         self.broadcast_sender = BroadcastSender(authorization_token)
         self.location_sender = LocationSender(authorization_token)
         self.sticker_sender = StickerSender(authorization_token)
+        self.quick_reply_sender = QuickReplySender(authorization_token)
+        self.image_carousel_sender = ImageCarouselSender(authorization_token)
         self.friends_and_groups = FriendAndGroupManager(authorization_token)
 
     def send_message(
@@ -20,6 +24,13 @@ class OneChat:
     ):
         return self.message_sender.send_message(
             to, bot_id, message, custom_notification
+        )
+
+    def send_template(
+        self, to: str, bot_id: str, template: list, custom_notification: str = None
+    ):
+        return self.message_sender.send_template(
+            to, bot_id, template, custom_notification
         )
 
     def send_file(
@@ -53,6 +64,20 @@ class OneChat:
     ):
         return self.sticker_sender.send_sticker(
             to, bot_id, sticker_id, custom_notification
+        )
+
+    def send_quickreply(
+        self, to: str, bot_id: str, message: str, quick_reply: list, custom_notification: str = None
+    ):
+        return self.quick_reply_sender.send_quickreply(
+            to, bot_id, message, quick_reply, custom_notification
+        )
+
+    def send_image_carousel(
+        self, to: str, bot_id: str, elements: list, custom_notification: str = None
+    ):
+        return self.image_carousel_sender.send_image_carousel(
+            to, bot_id, elements, custom_notification
         )
 
     def fetch_friends_and_groups(self, bot_id: str):

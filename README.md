@@ -126,6 +126,82 @@ response = send_sticker(sticker_id="YOUR_STICKER_ID")
 print("Send Sticker Response:", response)
 ```
 
+### Send Template
+
+To send a template message
+
+```python
+response = send_template(
+        template=[
+            {
+                "image": "https://example.com/image.jpg",
+                "title": "Your Title Here",
+                "detail": "Your Detail Here",
+                "choice": [
+                    {
+                        "label": "Yes",
+                        "type": "text",
+                        "payload": "Yes"
+                    },
+                    # ....
+                ],
+            },
+        ]
+    )
+print("Send Template Response:", response)
+```
+
+> [!TIP]
+> You can read more about template messages in the OneChat API documentation.
+> [Click here](https://chat-develop.one.th/develop/docs/template/abouttemplate)
+
+### Send Quick Reply
+
+To send a quick reply message
+
+```python
+response = send_quickreply(
+        message="Hello, this is a quick reply message!",
+        quick_reply=[
+            {
+                "label": "Register",
+                "type": "text",
+                "message": "I need to register",
+                "payload": "Register",
+            }
+        ],
+    )
+print("Send Quick Reply Response:", response)
+```
+
+> [!TIP]
+> You can read more about quick reply messages in the OneChat API documentation.
+> [Click here](https://chat-develop.one.th/develop/docs/quickreply/aboutquickreply)
+
+## Send Image Carousel
+
+To send an image carousel message
+
+```python
+response = send_image_carousel(
+        elements=[
+            {
+                "type": "text",
+                "image": "https://example.com/image1.jpg",
+                "action": "hello",
+                "payload": "Register",
+                "sign": "false",
+                "onechat_token": "false",
+                "button": "click me",
+            }
+        ]
+    )
+print("Send Image Carousel Response:", response)
+```
+
+> You can read more about image carousel messages in the OneChat API documentation.
+> [Click here](https://chat-develop.one.th/develop/docs/carouselimage/aboutimagecarousel)
+
 ## Example
 
 Here’s a complete example of how to use the library
