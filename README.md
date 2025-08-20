@@ -12,6 +12,9 @@ The OneChat Python library provides an interface for sending messages, broadcast
 - Broadcast Messages: Send messages to multiple recipients at once.
 - Send Locations: Share geographical locations with users.
 - Send Stickers: Send sticker messages to users.
+- Send Template: Send template messages to users.
+- Send Quick Reply: Send quick reply messages to users.
+- Send Image Carousel: Send an image carousel message to users.
 - Fetch Friends and Groups: Retrieve the complete list of friends and groups for a bot.
 - List All Friends: Get a list of all friends associated with the bot.
 - List Friend IDs: Retrieve the One IDs of all friends for easy identification.
@@ -240,6 +243,49 @@ def main():
     # Send a sticker
     resp_sticker = send_sticker(sticker_id="YOUR_STICKER_ID")
     print("Send Sticker Response:", resp_sticker)
+
+    # Send Template
+    resp_template = send_template(
+        template=[
+            {
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdIV4ObN4Wy4BcsMkRlXGBqKAkJHyIZeZ_hw&s",
+                "title": "Kaomunkai",
+                "detail": "Kaomunkai 250฿",
+                "choice": [{"label": "Buy", "type": "text", "payload": "Buy"}],
+            },
+        ]
+    )
+    print("Send Template Response:", resp_template)
+
+    # Send Quick Reply
+    resp_quick_reply = send_quickreply(
+        message="Hello, this is a quick reply message!",
+        quick_reply=[
+            {
+                "label": "Register",
+                "type": "text",
+                "message": "I need to register",
+                "payload": "Register",
+            }
+        ],
+    )
+    print("Send Quick Reply Response:", resp_quick_reply)
+
+    # Send Image Carousel
+    resp_image_carousel = send_image_carousel(
+        elements=[
+            {
+                "type": "text",
+                "image": "https://onechat.one.th/xxxxxxxxxxx.jpg",
+                "action": "hello",
+                "payload": "Register",
+                "sign": "false",
+                "onechat_token": "false",
+                "button": "click me",
+            }
+        ]
+    )
+    print("Send Image Carousel Response:", resp_image_carousel)
 
     # Get a list of friends and groups
     friends_and_groups = fetch_friends_and_groups() # you can use fetch_friends_and_groups("BOT_ID") to get friends and groups of another bot
