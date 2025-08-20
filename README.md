@@ -252,10 +252,17 @@ def main():
     resp_template = send_template(
         template=[
             {
-                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdIV4ObN4Wy4BcsMkRlXGBqKAkJHyIZeZ_hw&s",
-                "title": "Kaomunkai",
-                "detail": "Kaomunkai 250฿",
-                "choice": [{"label": "Buy", "type": "text", "payload": "Buy"}],
+                "image": "https://example.com/image.jpg",
+                "title": "Your Title Here",
+                "detail": "Your Detail Here",
+                "choice": [
+                    {
+                        "label": "Yes",
+                        "type": "text",
+                        "payload": "Yes"
+                    },
+                    # ....
+                ],
             },
         ]
     )
@@ -280,7 +287,7 @@ def main():
         elements=[
             {
                 "type": "text",
-                "image": "https://onechat.one.th/xxxxxxxxxxx.jpg",
+                "image": "https://example.com/image1.jpg",
                 "action": "hello",
                 "payload": "Register",
                 "sign": "false",
