@@ -67,7 +67,12 @@ class OneChat:
         )
 
     def send_quickreply(
-        self, to: str, bot_id: str, message: str, quick_reply: list, custom_notification: str = None
+        self,
+        to: str,
+        bot_id: str,
+        message: str,
+        quick_reply: list,
+        custom_notification: str = None,
     ):
         return self.quick_reply_sender.send_quickreply(
             to, bot_id, message, quick_reply, custom_notification

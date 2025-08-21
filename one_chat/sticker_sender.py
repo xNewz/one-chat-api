@@ -1,7 +1,6 @@
 # one_chat/sticker_sender.py
 
 import requests
-import json
 
 
 class StickerSender:
@@ -30,7 +29,7 @@ class StickerSender:
         response = requests.post(self.api_url, headers=headers, json=payload)
 
         if response.status_code == 200:
-            return json.dumps(response.json(), indent=4)
+            return response.json()
         else:
             return {
                 "status": "fail",

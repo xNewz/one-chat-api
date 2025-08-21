@@ -1,7 +1,6 @@
 # one_chat/message_sender.py
 
 import requests
-import json
 import re
 
 
@@ -27,7 +26,7 @@ class MessageSender:
             response = requests.post(self.base_url, headers=self.headers, json=payload)
 
             if response.status_code == 200:
-                return json.dumps(response.json(), indent=4)
+                return response.json()
             else:
                 return self._handle_error(response)
         except requests.exceptions.RequestException as e:
@@ -44,7 +43,7 @@ class MessageSender:
             response = requests.post(self.base_url, headers=self.headers, json=payload)
 
             if response.status_code == 200:
-                return json.dumps(response.json(), indent=4)
+                return response.json()
             else:
                 return self._handle_error(response)
         except requests.exceptions.RequestException as e:
@@ -75,7 +74,7 @@ class MessageSender:
                 )
 
                 if response.status_code == 200:
-                    return json.dumps(response.json(), indent=4)
+                    return response.json()
                 else:
                     print(f"Response Status: {response.status_code}")
                     print(f"Response Content: {response.content}")
@@ -106,7 +105,7 @@ class MessageSender:
             response = requests.post(self.base_url, headers=self.headers, json=payload)
 
             if response.status_code == 200:
-                return json.dumps(response.json(), indent=4)
+                return response.json()
             else:
                 return self._handle_error(response)
         except requests.exceptions.RequestException as e:
@@ -119,5 +118,5 @@ class MessageSender:
                 "status": error_response.get("status", "fail"),
                 "message": error_response.get("message", "Unknown error occurred."),
             }
-        except json.JSONDecodeError:
+        except ValueError:
             return {"status": "fail", "message": "Invalid response from the server."}

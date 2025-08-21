@@ -166,7 +166,7 @@ def send_sticker(
 
 def send_quickreply(
     to: str = None,
-    bot_id: str  = None,
+    bot_id: str = None,
     message: str = None,
     quick_reply: list = None,
     custom_notification: str = None,
@@ -184,11 +184,14 @@ def send_quickreply(
             "Both 'to' and 'bot_id' must be provided either during initialization or when calling this method."
         )
 
-    return ONE_CHAT_INSTANCE.send_quickreply(to, bot_id, message, quick_reply, custom_notification)
+    return ONE_CHAT_INSTANCE.send_quickreply(
+        to, bot_id, message, quick_reply, custom_notification
+    )
+
 
 def send_image_carousel(
     to: str = None,
-    bot_id: str  = None,
+    bot_id: str = None,
     elements: list = None,
     custom_notification: str = None,
 ):
@@ -205,7 +208,10 @@ def send_image_carousel(
             "Both 'to' and 'bot_id' must be provided either during initialization or when calling this method."
         )
 
-    return ONE_CHAT_INSTANCE.send_image_carousel(to, bot_id, elements, custom_notification)
+    return ONE_CHAT_INSTANCE.send_image_carousel(
+        to, bot_id, elements, custom_notification
+    )
+
 
 def fetch_friends_and_groups(bot_id: str = None):
     if ONE_CHAT_INSTANCE is None:

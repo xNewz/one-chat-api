@@ -1,7 +1,6 @@
 # one_chat/friend_and_group_manager.py
 
 import requests
-import json
 
 
 class FriendAndGroupManager:
@@ -21,7 +20,7 @@ class FriendAndGroupManager:
             response = requests.post(self.base_url, headers=self.headers, json=payload)
 
             if response.status_code == 200:
-                return json.dumps(response.json(), indent=4)
+                return response.json()
             else:
                 return self._handle_error(response)
         except requests.exceptions.RequestException as e:
@@ -29,42 +28,36 @@ class FriendAndGroupManager:
 
     def list_all_friends(self, bot_id: str) -> dict:
         try:
-            response = json.loads(self.fetch_friends_and_groups(bot_id))
+            response = self.fetch_friends_and_groups(bot_id)
             if response.get("status") == "success":
-                return json.dumps(response.get("list_friend", []), indent=4)
+                return response.get("list_friend", [])
             return []
         except requests.exceptions.RequestException as e:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def list_friend_ids(self, bot_id: str) -> dict:
         try:
-            response = json.loads(self.fetch_friends_and_groups(bot_id))
+            response = self.fetch_friends_and_groups(bot_id)
             if response.get("status") == "success":
-                return json.dumps(
-                    [friend["one_id"] for friend in response.get("list_friend", [])],
-                    indent=4,
-                )
+                return [friend["one_id"] for friend in response.get("list_friend", [])]
             return []
         except requests.exceptions.RequestException as e:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def list_all_groups(self, bot_id) -> dict:
         try:
-            response = json.loads(self.fetch_friends_and_groups(bot_id))
+            response = self.fetch_friends_and_groups(bot_id)
             if response.get("status") == "success":
-                return json.dumps(response.get("list_group", []), indent=4)
+                return response.get("list_group", [])
             return []
         except requests.exceptions.RequestException as e:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def list_group_ids(self, bot_id) -> dict:
         try:
-            response = json.loads(self.fetch_friends_and_groups(bot_id))
+            response = self.fetch_friends_and_groups(bot_id)
             if response.get("status") == "success":
-                return json.dumps(
-                    [group["group_id"] for group in response.get("list_group", [])],
-                    indent=4,
-                )
+                return [group["group_id"] for group in response.get("list_group", [])]
             return []
         except requests.exceptions.RequestException as e:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
@@ -76,5 +69,5 @@ class FriendAndGroupManager:
                 "status": error_response.get("status", "fail"),
                 "message": error_response.get("message", "Unknown error occurred."),
             }
-        except json.JSONDecodeError:
+        except ValueError:
             return {"status": "fail", "message": "Invalid response from the server."}
