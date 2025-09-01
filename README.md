@@ -1,5 +1,7 @@
 # OneChat Python Library Documentation
 
+[![Publish Workflow Status](https://github.com/xNewz/one-chat-api/actions/workflows/publish.yml/badge.svg)](https://github.com/xNewz/one-chat-api/actions/workflows/publish.yml)
+
 ## Overview
 
 The OneChat Python library provides an interface for sending messages, broadcasting messages to multiple users, sending location information, sending stickers, and sending files through the OneChat API.
