@@ -3,7 +3,8 @@
 <!-- Build & Release -->
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/xnewz/one-chat-api/publish.yml)
 ![PyPI - Version](https://img.shields.io/pypi/v/one-chat-api)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/one-chat-api)
+![PyPI - Downloads](https://static.pepy.tech/personalized-badge/one-chat-api?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=GREEN&left_text=downloads)
+<!-- ![PyPI - Downloads](https://img.shields.io/pypi/dm/one-chat-api) -->
 
 <!-- Compatibility -->
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/one-chat-api)
