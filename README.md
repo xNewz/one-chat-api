@@ -1,6 +1,18 @@
 # OneChat Python Library Documentation
 
-[![Publish Workflow Status](https://github.com/xNewz/one-chat-api/actions/workflows/publish.yml/badge.svg)](https://github.com/xNewz/one-chat-api/actions/workflows/publish.yml)
+<!-- Build & Release -->
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/xnewz/one-chat-api/publish.yml)
+![PyPI - Version](https://img.shields.io/pypi/v/one-chat-api)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/one-chat-api)
+
+<!-- Compatibility -->
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/one-chat-api)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/one-chat-api)
+
+<!-- Meta -->
+![GitHub License](https://img.shields.io/github/license/xnewz/one-chat-api)
+![GitHub Repo stars](https://img.shields.io/github/stars/xnewz/one-chat-api?style=social)
+
 
 ## Overview
 
