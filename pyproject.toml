@@ -7,7 +7,7 @@ name = "one-chat-api"
 version = "0.4.0"
 description = "Python client for OneChat API: messages, files, broadcasts, locations, stickers, templates, quick replies, and image carousel."
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.8"
 license = { text = "MIT" }
 authors = [{ name = "Pargorn Ruasijan (xNewz)", email = "contact@pargorn.com" }]
 dependencies = [
@@ -15,6 +15,11 @@ dependencies = [
 ]
 classifiers = [
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
 ]
