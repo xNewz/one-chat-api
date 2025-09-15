@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "one-chat-api"
-version = "0.4.0"
+version = "0.4.1"
 description = "Python client for OneChat API: messages, files, broadcasts, locations, stickers, templates, quick replies, and image carousel."
 readme = "README.md"
 requires-python = ">=3.8"

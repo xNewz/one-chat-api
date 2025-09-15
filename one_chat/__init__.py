@@ -3,7 +3,7 @@ from typing import List, Optional, Union
 # one_chat/__init__.py
 from .one_chat import OneChat
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 ONE_CHAT_INSTANCE: Optional[OneChat] = None
 DEFAULT_TO: Optional[str] = None

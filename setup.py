@@ -8,7 +8,7 @@ except FileNotFoundError:
 
 setup(
     name="one-chat-api",
-    version="0.4.0",
+    version="0.4.1",
     description="Python client for OneChat API.",
     long_description=long_description,
     long_description_content_type="text/markdown",
