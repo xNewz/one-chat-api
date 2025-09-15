@@ -1,6 +1,9 @@
-# one_chat/quickreply_sender.py
+from typing import Optional
 
+# one_chat/quickreply_sender.py
 import requests
+
+DEFAULT_TIMEOUT = (5, 15)
 
 
 class QuickReplySender:
@@ -18,9 +21,9 @@ class QuickReplySender:
         self,
         to: str,
         bot_id: str,
-        message: str,
-        quick_reply: list,
-        custom_notification: str = None,
+        message: Optional[str],
+        quick_reply: Optional[list],
+        custom_notification: Optional[str] = None,
     ) -> dict:
         payload = {
             "to": to,
@@ -32,7 +35,9 @@ class QuickReplySender:
             payload["custom_notification"] = custom_notification
 
         try:
-            response = requests.post(self.base_url, headers=self.headers, json=payload)
+            response = requests.post(
+                self.base_url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT
+            )
 
             if response.status_code == 200:
                 return response.json()

@@ -1,7 +1,9 @@
-# one_chat/message_sender.py
+import re
+from typing import Optional
 
 import requests
-import re
+
+DEFAULT_TIMEOUT = (5, 15)
 
 
 class MessageSender:
@@ -16,14 +18,20 @@ class MessageSender:
         }
 
     def send_message(
-        self, to: str, bot_id: str, message: str, custom_notification: str = None
+        self,
+        to: str,
+        bot_id: str,
+        message: Optional[str],
+        custom_notification: Optional[str] = None,
     ) -> dict:
         payload = {"to": to, "bot_id": bot_id, "type": "text", "message": message}
         if custom_notification:
             payload["custom_notification"] = custom_notification
 
         try:
-            response = requests.post(self.base_url, headers=self.headers, json=payload)
+            response = requests.post(
+                self.base_url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT
+            )
 
             if response.status_code == 200:
                 return response.json()
@@ -33,14 +41,20 @@ class MessageSender:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def send_template(
-        self, to: str, bot_id: str, template: list, custom_notification: str = None
+        self,
+        to: str,
+        bot_id: str,
+        template: Optional[list],
+        custom_notification: Optional[str] = None,
     ) -> dict:
         payload = {"to": to, "bot_id": bot_id, "type": "template", "elements": template}
         if custom_notification:
             payload["custom_notification"] = custom_notification
 
         try:
-            response = requests.post(self.base_url, headers=self.headers, json=payload)
+            response = requests.post(
+                self.base_url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT
+            )
 
             if response.status_code == 200:
                 return response.json()
@@ -50,7 +64,11 @@ class MessageSender:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def send_file(
-        self, to: str, bot_id: str, file_path: str, custom_notification: str = None
+        self,
+        to: str,
+        bot_id: str,
+        file_path: Optional[str],
+        custom_notification: Optional[str] = None,
     ) -> dict:
         data = {
             "to": to,
@@ -63,6 +81,9 @@ class MessageSender:
 
         headers = {k: v for k, v in self.headers.items() if k.lower() != "content-type"}
 
+        if file_path is None:
+            return {"status": "fail", "message": "file_path is required"}
+
         with open(file_path, "rb") as file:
             files = {
                 "file": (file_path, file),
@@ -70,22 +91,28 @@ class MessageSender:
 
             try:
                 response = requests.post(
-                    self.base_url, headers=headers, data=data, files=files
+                    self.base_url,
+                    headers=headers,
+                    data=data,
+                    files=files,
+                    timeout=DEFAULT_TIMEOUT,
                 )
 
                 if response.status_code == 200:
                     return response.json()
                 else:
-                    print(f"Response Status: {response.status_code}")
-                    print(f"Response Content: {response.content}")
                     return self._handle_error(response)
             except requests.exceptions.RequestException as e:
                 return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def send_webview(
-        self, to: str, bot_id: str, url: str, custom_notification: str = None
+        self,
+        to: str,
+        bot_id: str,
+        url: Optional[str],
+        custom_notification: Optional[str] = None,
     ):
-        if not re.match(r"^(http|https)://", url):
+        if not url or not re.match(r"^(http|https)://", url):
             return {
                 "status": "fail",
                 "message": "Please specify a protocol (http or https) in the URL.",
@@ -102,7 +129,9 @@ class MessageSender:
             payload["custom_notification"] = custom_notification
 
         try:
-            response = requests.post(self.base_url, headers=self.headers, json=payload)
+            response = requests.post(
+                self.base_url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT
+            )
 
             if response.status_code == 200:
                 return response.json()

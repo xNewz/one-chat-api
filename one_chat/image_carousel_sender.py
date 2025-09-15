@@ -1,6 +1,9 @@
-# one_chat/image_carousel_sender.py
+from typing import Optional
 
+# one_chat/image_carousel_sender.py
 import requests
+
+DEFAULT_TIMEOUT = (5, 15)
 
 
 class ImageCarouselSender:
@@ -15,14 +18,20 @@ class ImageCarouselSender:
         }
 
     def send_image_carousel(
-        self, to: str, bot_id: str, elements: list, custom_notification: str = None
+        self,
+        to: str,
+        bot_id: str,
+        elements: Optional[list],
+        custom_notification: Optional[str] = None,
     ) -> dict:
         payload = {"to": to, "bot_id": bot_id, "elements": elements}
         if custom_notification:
             payload["custom_notification"] = custom_notification
 
         try:
-            response = requests.post(self.base_url, headers=self.headers, json=payload)
+            response = requests.post(
+                self.base_url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT
+            )
 
             if response.status_code == 200:
                 return response.json()

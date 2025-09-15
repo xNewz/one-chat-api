@@ -3,3 +3,6 @@ __pycache__/
 build/
 dist/
 one_chat_api.egg-info/
+.env
+.env.*
+.DS_Store

@@ -1,5 +1,7 @@
 # one_chat/broadcast_sender.py
 
+from typing import List, Optional
+
 import requests
 
 
@@ -14,14 +16,19 @@ class BroadcastSender:
             "Content-Type": "application/json",
         }
 
-    def broadcast_message(self, bot_id: str, to: str, message: str) -> dict:
+    def broadcast_message(self, bot_id: str, to: List[str], message: Optional[str]) -> dict:
+        if not isinstance(to, list):
+            return {"status": "fail", "message": "parameter 'to' must be a list of user IDs."}
+
         if len(to) > 100:
             return {"status": "fail", "message": "parameter to out of range."}
 
         payload = {"bot_id": bot_id, "to": to, "message": message}
 
         try:
-            response = requests.post(self.base_url, headers=self.headers, json=payload)
+            response = requests.post(
+                self.base_url, headers=self.headers, json=payload, timeout=(5, 15)
+            )
 
             if response.status_code == 200:
                 return response.json()
@@ -34,7 +41,7 @@ class BroadcastSender:
         try:
             error_response = response.json()
             return {
-                "status": error_response.get("status", "fail"),
+                "status": "fail",
                 "message": error_response.get("message", "Unknown error occurred."),
             }
         except ValueError:

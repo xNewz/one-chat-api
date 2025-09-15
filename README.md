@@ -336,3 +336,20 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+## Contributing
+
+Contributions are welcome! Please see `CONTRIBUTING.md` and `SECURITY.md`. Run checks locally with:
+
+```
+ruff check .
+black --check .
+mypy one_chat
+pytest
+```
+
+## Examples
+
+See runnable examples in `examples/`:
+- `examples/quickstart.py` — send a text message (uses env `ONECHAT_TOKEN`, `ONECHAT_TO`, `ONECHAT_BOT_ID`)
+- `examples/broadcast.py` — broadcast to multiple users (uses env `ONECHAT_TOKEN`, `ONECHAT_BOT_ID`, `ONECHAT_USERS`)

@@ -1,0 +1,28 @@
+name: Bug report
+description: File a bug report
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened and what did you expect?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      placeholder: e.g. 0.4.0
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Minimal code to reproduce, redacting secrets
+      render: shell
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs/traceback
+      render: text
+

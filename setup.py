@@ -1,15 +1,15 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 try:
-    with open("README.md", "r", encoding="utf-8") as fh:
+    with open("README.md", encoding="utf-8") as fh:
         long_description = fh.read()
 except FileNotFoundError:
-    long_description = "The OneChat Python library provides an interface for sending messages, broadcasting messages to multiple users, sending location information, sending stickers, and sending files through the OneChat API."  # fallback text
+    long_description = "Python client for OneChat API."
 
 setup(
     name="one-chat-api",
-    version="0.3.2",
-    description="The OneChat Python library provides an interface for sending messages, broadcasting messages to multiple users, sending location information, sending stickers, and sending files through the OneChat API.",
+    version="0.4.0",
+    description="Python client for OneChat API.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Pargorn Ruasijan (xNewz)",
