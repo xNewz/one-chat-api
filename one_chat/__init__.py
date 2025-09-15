@@ -1,4 +1,4 @@
-from typing import Optional, Union
+from typing import List, Optional, Union
 
 # one_chat/__init__.py
 from .one_chat import OneChat
@@ -111,7 +111,7 @@ def send_webview(
 
 def broadcast_message(
     bot_id: Optional[str] = None,
-    to: Optional[Union[list[str], str]] = None,
+    to: Optional[Union[List[str], str]] = None,
     message: Optional[str] = None,
 ):
     if ONE_CHAT_INSTANCE is None:
