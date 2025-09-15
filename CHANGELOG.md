@@ -14,4 +14,4 @@ All notable changes to this project will be documented in this file.
 - Broadcast API now accepts lists consistently; normalizes single string
 - Added request timeouts across all network calls
 - Consistent error handling for senders
-
+ - Relax dependency: `requests>=2.32.2` to support Python 3.8 CI
