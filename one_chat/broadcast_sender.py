@@ -4,6 +4,8 @@ from typing import List, Optional
 
 import requests
 
+DEFAULT_TIMEOUT = (5, 15)
+
 
 class BroadcastSender:
     def __init__(self, authorization_token: str):
@@ -27,7 +29,7 @@ class BroadcastSender:
 
         try:
             response = requests.post(
-                self.base_url, headers=self.headers, json=payload, timeout=(5, 15)
+                self.base_url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT
             )
 
             if response.status_code == 200:

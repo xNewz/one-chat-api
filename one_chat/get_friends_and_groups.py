@@ -3,6 +3,8 @@ from typing import Any, Dict, List
 # one_chat/friend_and_group_manager.py
 import requests
 
+DEFAULT_TIMEOUT = (5, 15)
+
 
 class FriendAndGroupManager:
     def __init__(self, authorization_token: str):
@@ -18,7 +20,9 @@ class FriendAndGroupManager:
     def fetch_friends_and_groups(self, bot_id: str) -> Dict[str, Any]:
         payload = {"bot_id": bot_id}
         try:
-            response = requests.post(self.base_url, headers=self.headers, json=payload)
+            response = requests.post(
+                self.base_url, headers=self.headers, json=payload, timeout=DEFAULT_TIMEOUT
+            )
 
             if response.status_code == 200:
                 return response.json()
