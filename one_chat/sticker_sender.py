@@ -8,7 +8,10 @@ DEFAULT_TIMEOUT = (5, 15)
 
 
 class StickerSender:
+    """Send stickers via the message API."""
+
     def __init__(self, authorization_token: str):
+        """Initialize with Bearer token (with/without prefix)."""
         if authorization_token.startswith("Bearer "):
             authorization_token = authorization_token.replace("Bearer ", "", 1)
         self.authorization_token = authorization_token
@@ -21,6 +24,7 @@ class StickerSender:
         sticker_id: Optional[str],
         custom_notification: Optional[str] = None,
     ) -> dict:
+        """Send a sticker by `sticker_id` to the recipient `to`."""
         headers = {
             "Authorization": f"Bearer {self.authorization_token}",
             "Content-Type": "application/json",
@@ -48,6 +52,7 @@ class StickerSender:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def _handle_error(self, response: requests.Response) -> dict:
+        """Normalize API error responses for consistency."""
         try:
             error_response = response.json()
             return {

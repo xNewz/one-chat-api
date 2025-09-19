@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.2] - 2025-09-19
+### Changed
+- Added comprehensive docstrings/comments across all classes and functions in `one_chat` package
+- No functional changes; public API remains the same
+
 ## [0.4.1] - 2025-09-15
 ### Added
 - Extensive unit tests across all senders and wrappers

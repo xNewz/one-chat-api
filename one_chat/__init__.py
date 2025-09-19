@@ -3,7 +3,7 @@ from typing import List, Optional, Union
 # one_chat/__init__.py
 from .one_chat import OneChat
 
-__version__ = "0.4.1"
+__version__ = "0.4.2"
 
 ONE_CHAT_INSTANCE: Optional[OneChat] = None
 DEFAULT_TO: Optional[str] = None
@@ -11,6 +11,11 @@ DEFAULT_BOT_ID: Optional[str] = None
 
 
 def init(authorization_token: str, to: Optional[str] = None, bot_id: Optional[str] = None):
+    """Initialize a global OneChat instance and optional defaults.
+
+    After calling, wrapper functions can use default `to` and `bot_id` values
+    if not provided explicitly.
+    """
     global ONE_CHAT_INSTANCE, DEFAULT_TO, DEFAULT_BOT_ID
     ONE_CHAT_INSTANCE = OneChat(authorization_token)
     DEFAULT_TO = to
@@ -23,6 +28,10 @@ def send_message(
     message: Optional[str] = None,
     custom_notification: Optional[str] = None,
 ):
+    """Send a text message using the initialized client.
+
+    Falls back to defaults provided in :func:`init` when not specified.
+    """
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -46,6 +55,7 @@ def send_template(
     template: Optional[list] = None,
     custom_notification: Optional[str] = None,
 ):
+    """Send a template message via the global client."""
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -69,6 +79,7 @@ def send_file(
     file_path: Optional[str] = None,
     custom_notification: Optional[str] = None,
 ):
+    """Upload and send a file via the global client."""
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -92,6 +103,7 @@ def send_webview(
     url: Optional[str] = None,
     custom_notification: Optional[str] = None,
 ):
+    """Send a webview (URL) message via the global client."""
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -114,6 +126,10 @@ def broadcast_message(
     to: Optional[Union[List[str], str]] = None,
     message: Optional[str] = None,
 ):
+    """Broadcast a message to multiple recipients using the global client.
+
+    Accepts a single One ID or a list; a single string will be normalized to list.
+    """
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -145,6 +161,7 @@ def send_location(
     address: Optional[str] = None,
     custom_notification: Optional[str] = None,
 ):
+    """Send a location payload via the global client."""
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -170,6 +187,7 @@ def send_sticker(
     sticker_id: Optional[str] = None,
     custom_notification: Optional[str] = None,
 ):
+    """Send a sticker via the global client."""
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -194,6 +212,7 @@ def send_quickreply(
     quick_reply: Optional[list] = None,
     custom_notification: Optional[str] = None,
 ):
+    """Send a message with quick replies via the global client."""
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -217,6 +236,7 @@ def send_image_carousel(
     elements: Optional[list] = None,
     custom_notification: Optional[str] = None,
 ):
+    """Send an image carousel via the global client."""
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -235,6 +255,7 @@ def send_image_carousel(
 
 
 def fetch_friends_and_groups(bot_id: Optional[str] = None):
+    """Fetch friends and groups for the bot using the global client."""
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -251,6 +272,7 @@ def fetch_friends_and_groups(bot_id: Optional[str] = None):
 
 
 def list_all_friends(bot_id: Optional[str] = None):
+    """Return full friend objects for the bot via the global client."""
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -267,6 +289,7 @@ def list_all_friends(bot_id: Optional[str] = None):
 
 
 def list_friend_ids(bot_id: Optional[str] = None):
+    """Return only friend One IDs for the bot via the global client."""
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -283,6 +306,7 @@ def list_friend_ids(bot_id: Optional[str] = None):
 
 
 def list_all_groups(bot_id: Optional[str] = None):
+    """Return full group objects for the bot via the global client."""
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."
@@ -299,6 +323,7 @@ def list_all_groups(bot_id: Optional[str] = None):
 
 
 def list_group_ids(bot_id: Optional[str] = None):
+    """Return only group IDs for the bot via the global client."""
     if ONE_CHAT_INSTANCE is None:
         raise Exception(
             "OneChat is not initialized. Call init(authorization_token, to, bot_id) first."

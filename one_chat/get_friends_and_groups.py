@@ -7,7 +7,10 @@ DEFAULT_TIMEOUT = (5, 15)
 
 
 class FriendAndGroupManager:
+    """Fetch and extract friend/group information for a bot."""
+
     def __init__(self, authorization_token: str):
+        """Initialize with Bearer token (with/without prefix)."""
         if authorization_token.startswith("Bearer "):
             authorization_token = authorization_token.replace("Bearer ", "", 1)
         self.authorization_token = authorization_token
@@ -18,6 +21,7 @@ class FriendAndGroupManager:
         }
 
     def fetch_friends_and_groups(self, bot_id: str) -> Dict[str, Any]:
+        """Call the API to fetch friends and groups for the given `bot_id`."""
         payload = {"bot_id": bot_id}
         try:
             response = requests.post(
@@ -32,6 +36,7 @@ class FriendAndGroupManager:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def list_all_friends(self, bot_id: str) -> List[Dict[str, Any]]:
+        """Return friend objects under the "list_friend" key, or an empty list."""
         try:
             response = self.fetch_friends_and_groups(bot_id)
             if response.get("status") == "success":
@@ -41,6 +46,7 @@ class FriendAndGroupManager:
             return []
 
     def list_friend_ids(self, bot_id: str) -> List[str]:
+        """Return only One IDs for all friends, or an empty list."""
         try:
             response = self.fetch_friends_and_groups(bot_id)
             if response.get("status") == "success":
@@ -50,6 +56,7 @@ class FriendAndGroupManager:
             return []
 
     def list_all_groups(self, bot_id: str) -> List[Dict[str, Any]]:
+        """Return group objects under the "list_group" key, or an empty list."""
         try:
             response = self.fetch_friends_and_groups(bot_id)
             if response.get("status") == "success":
@@ -59,6 +66,7 @@ class FriendAndGroupManager:
             return []
 
     def list_group_ids(self, bot_id: str) -> List[str]:
+        """Return only group IDs for all groups, or an empty list."""
         try:
             response = self.fetch_friends_and_groups(bot_id)
             if response.get("status") == "success":
@@ -68,6 +76,7 @@ class FriendAndGroupManager:
             return []
 
     def _handle_error(self, response: requests.Response) -> dict:
+        """Normalize API error responses to a consistent structure."""
         try:
             error_response = response.json()
             return {

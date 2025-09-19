@@ -6,7 +6,10 @@ DEFAULT_TIMEOUT = (5, 15)
 
 
 class LocationSender:
+    """Send location payloads via the message API."""
+
     def __init__(self, authorization_token: str):
+        """Initialize with Bearer token (with/without prefix)."""
         if authorization_token.startswith("Bearer "):
             authorization_token = authorization_token.replace("Bearer ", "", 1)
         self.authorization_token = authorization_token
@@ -21,6 +24,7 @@ class LocationSender:
         address: Optional[str],
         custom_notification: Optional[str] = None,
     ) -> dict:
+        """Send a location with latitude/longitude and optional address."""
         headers = {
             "Authorization": f"Bearer {self.authorization_token}",
             "Content-Type": "application/json",
@@ -49,6 +53,7 @@ class LocationSender:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def _handle_error(self, response: requests.Response) -> dict:
+        """Normalize error responses to a consistent format."""
         try:
             error_response = response.json()
             return {

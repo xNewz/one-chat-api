@@ -7,7 +7,10 @@ DEFAULT_TIMEOUT = (5, 15)
 
 
 class ImageCarouselSender:
+    """Send image carousel messages."""
+
     def __init__(self, authorization_token: str):
+        """Initialize with Bearer token (with/without prefix)."""
         if authorization_token.startswith("Bearer "):
             authorization_token = authorization_token.replace("Bearer ", "", 1)
         self.authorization_token = authorization_token
@@ -24,6 +27,7 @@ class ImageCarouselSender:
         elements: Optional[list],
         custom_notification: Optional[str] = None,
     ) -> dict:
+        """Send an image carousel defined by `elements` to the recipient."""
         payload = {"to": to, "bot_id": bot_id, "elements": elements}
         if custom_notification:
             payload["custom_notification"] = custom_notification
@@ -41,6 +45,7 @@ class ImageCarouselSender:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def _handle_error(self, response: requests.Response) -> dict:
+        """Normalize API error responses for consistency."""
         try:
             error_response = response.json()
             return {

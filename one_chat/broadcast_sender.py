@@ -8,7 +8,10 @@ DEFAULT_TIMEOUT = (5, 15)
 
 
 class BroadcastSender:
+    """Send broadcast messages to multiple recipients."""
+
     def __init__(self, authorization_token: str):
+        """Initialize with Bearer token (with/without prefix)."""
         if authorization_token.startswith("Bearer "):
             authorization_token = authorization_token.replace("Bearer ", "", 1)
         self.authorization_token = authorization_token
@@ -19,6 +22,10 @@ class BroadcastSender:
         }
 
     def broadcast_message(self, bot_id: str, to: List[str], message: Optional[str]) -> dict:
+        """Broadcast a message to up to 100 user IDs in `to`.
+
+        Returns the API response JSON or a normalized error.
+        """
         if not isinstance(to, list):
             return {"status": "fail", "message": "parameter 'to' must be a list of user IDs."}
 
@@ -40,6 +47,7 @@ class BroadcastSender:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def _handle_error(self, response: requests.Response) -> dict:
+        """Normalize API error responses for consistency."""
         try:
             error_response = response.json()
             return {

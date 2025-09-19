@@ -7,7 +7,16 @@ DEFAULT_TIMEOUT = (5, 15)
 
 
 class MessageSender:
+    """Low-level client for message-related endpoints.
+
+    Handles sending text, templates, files, and webviews via OneChat message API.
+    """
+
     def __init__(self, authorization_token: str):
+        """Create a MessageSender with the given token.
+
+        Accepts tokens with or without the leading "Bearer ".
+        """
         if authorization_token.startswith("Bearer "):
             authorization_token = authorization_token.replace("Bearer ", "", 1)
         self.authorization_token = authorization_token
@@ -24,6 +33,16 @@ class MessageSender:
         message: Optional[str],
         custom_notification: Optional[str] = None,
     ) -> dict:
+        """Send a text message.
+
+        Parameters:
+        - to: Recipient One ID.
+        - bot_id: Bot ID sending the message.
+        - message: The message text.
+        - custom_notification: Optional notification override.
+
+        Returns a response dict from the OneChat API or a normalized error.
+        """
         payload = {"to": to, "bot_id": bot_id, "type": "text", "message": message}
         if custom_notification:
             payload["custom_notification"] = custom_notification
@@ -47,6 +66,10 @@ class MessageSender:
         template: Optional[list],
         custom_notification: Optional[str] = None,
     ) -> dict:
+        """Send a template message with elements payload.
+
+        The `template` argument should follow the API's template format.
+        """
         payload = {"to": to, "bot_id": bot_id, "type": "template", "elements": template}
         if custom_notification:
             payload["custom_notification"] = custom_notification
@@ -70,6 +93,10 @@ class MessageSender:
         file_path: Optional[str],
         custom_notification: Optional[str] = None,
     ) -> dict:
+        """Upload and send a file.
+
+        Reads the file at `file_path` and sends it as multipart form data.
+        """
         data = {
             "to": to,
             "bot_id": bot_id,
@@ -112,6 +139,10 @@ class MessageSender:
         url: Optional[str],
         custom_notification: Optional[str] = None,
     ):
+        """Send a webview message containing a URL.
+
+        Validates that the URL starts with http(s) before sending.
+        """
         if not url or not re.match(r"^(http|https)://", url):
             return {
                 "status": "fail",
@@ -141,6 +172,7 @@ class MessageSender:
             return {"status": "fail", "message": f"Request failed: {str(e)}"}
 
     def _handle_error(self, response: requests.Response) -> dict:
+        """Normalize API error responses to a consistent structure."""
         try:
             error_response = response.json()
             return {
