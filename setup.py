@@ -14,6 +14,11 @@ setup(
     long_description_content_type="text/markdown",
     author="Pargorn Ruasijan (xNewz)",
     author_email="contact@pargorn.com",
+    url="https://github.com/xnewz/one-chat-api",
+    project_urls={
+        "Bug Tracker": "https://github.com/xnewz/one-chat-api/issues",
+        "Source Code": "https://github.com/xnewz/one-chat-api",
+    },
     packages=find_packages(),
     install_requires=[
         "requests>=2.32.2",

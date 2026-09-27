@@ -1,355 +1,277 @@
-# OneChat Python Library Documentation
+<div align="center">
 
-<!-- Build & Release -->
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/xnewz/one-chat-api/publish.yml)
-![PyPI - Version](https://img.shields.io/pypi/v/one-chat-api)
-![PyPI - Downloads](https://static.pepy.tech/personalized-badge/one-chat-api?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=GREEN&left_text=downloads)
-<!-- ![PyPI - Downloads](https://img.shields.io/pypi/dm/one-chat-api) -->
+# OneChat Python Library
 
-<!-- Compatibility -->
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/one-chat-api)
-![PyPI - Wheel](https://img.shields.io/pypi/wheel/one-chat-api)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/xnewz/one-chat-api/publish.yml?style=flat-square)](https://github.com/xnewz/one-chat-api/actions)
+[![PyPI - Version](https://img.shields.io/pypi/v/one-chat-api?style=flat-square)](https://pypi.org/project/one-chat-api/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/one-chat-api?style=flat-square)](https://pypi.org/project/one-chat-api/)
+[![PyPI - Downloads](https://static.pepy.tech/personalized-badge/one-chat-api?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=GREEN&left_text=downloads)](https://pepy.tech/project/one-chat-api)
+[![GitHub License](https://img.shields.io/github/license/xnewz/one-chat-api?style=flat-square)](https://github.com/xnewz/one-chat-api/blob/main/LICENSE)
+[![GitHub Repo stars](https://img.shields.io/github/stars/xnewz/one-chat-api?style=social)](https://github.com/xnewz/one-chat-api)
 
-<!-- Meta -->
-![GitHub License](https://img.shields.io/github/license/xnewz/one-chat-api)
-![GitHub Repo stars](https://img.shields.io/github/stars/xnewz/one-chat-api?style=social)
+**A robust, elegant, and fully typed Python client for integrating with the OneChat API.**
 
+</div>
 
-## Overview
+---
 
-The OneChat Python library provides an interface for sending messages, broadcasting messages to multiple users, sending location information, sending stickers, and sending files through the OneChat API.
+## 📖 Overview
 
-### Features
+The **OneChat Python Library** provides a streamlined and developer-friendly interface for interacting with the OneChat platform. Whether you need to send direct messages, broadcast announcements, share files, or build interactive chatbot experiences, this library simplifies the integration process.
 
-- Send Messages: Send messages to individual users or groups.
-- Send Files: Send files to users for easy sharing.
-- Send WebView: Send a webview to users for interactive content.
-- Broadcast Messages: Send messages to multiple recipients at once.
-- Send Locations: Share geographical locations with users.
-- Send Stickers: Send sticker messages to users.
-- Send Template: Send template messages to users.
-- Send Quick Reply: Send quick reply messages to users.
-- Send Image Carousel: Send an image carousel message to users.
-- Fetch Friends and Groups: Retrieve the complete list of friends and groups for a bot.
-- List All Friends: Get a list of all friends associated with the bot.
-- List Friend IDs: Retrieve the One IDs of all friends for easy identification.
-- List All Groups: Get a list of all groups associated with the bot.
-- List Group IDs: Retrieve the IDs of all groups for further actions.
+### ✨ Key Features
 
-## Installation
+- 💬 **Messaging:** Send text, template, and quick-reply messages to users or groups.
+- 📢 **Broadcasting:** Seamlessly send messages to multiple recipients at once.
+- 📁 **Media & Files:** Share images, documents, and other files with ease.
+- 📍 **Location & Stickers:** Send geographical coordinates and platform stickers.
+- 🎠 **Interactive UI:** Deploy Image Carousels and WebViews for rich user experiences.
+- 👥 **Audience Management:** Fetch, list, and manage friends and group IDs dynamically.
 
-To install the OneChat Python library, run the following command
+---
+
+## 🚀 Installation
+
+Install the library directly from PyPI using pip:
 
 ```bash
 pip install one-chat-api
 ```
 
-## Usage
+---
 
-To use the OneChat library, follow these steps
+## 🛠️ Quick Start
 
-### Import the Library
-
-```python
-from one_chat import (
-    init,
-    send_message,
-    send_file,
-    broadcast_message,
-    send_location,
-    send_sticker,
-    send_template,
-    send_quickreply,
-    send_image_carousel,
-    fetch_friends_and_groups,
-    list_all_friends,
-    list_friend_ids,
-    list_all_groups,
-    list_group_ids,
-)
-```
-
-or you can import all functions at once
+### 1. Initialization
+Before calling any API endpoints, initialize the library with your credentials.
 
 ```python
-from one_chat import *
-```
+from one_chat import init
 
-### Initialize the Library
-
-Before using the functions, you need to initialize the library with your authorization token, default recipient, and bot id
-
-```python
 init(
-    "YOUR_AUTHORIZATION_TOKEN",  # Replace with your token
-    "DEFAULT_RECIPIENT_ID",      # Replace with user ID or group ID
-    "YOUR_BOT_ID"                # Replace with your bot ID
+    authorization="YOUR_AUTHORIZATION_TOKEN", # Replace with your Bearer token
+    to="DEFAULT_RECIPIENT_ID",                # Default user or group ID
+    bot_id="YOUR_BOT_ID"                      # Your registered Bot ID
 )
 ```
 
-### Send Messages
+*(Alternatively, import all functions at once: `from one_chat import *`)*
 
-You can send a message to a specific user or group
+---
 
-```python
-response = send_message(message="Hello One!")
-print("Send Message response:", response)
-```
+### 2. Core Capabilities
 
-### Send Files
-
-You can send a file to a specific user or group
+#### Send a Message
+Send a basic text message to the default recipient or a specific user/group.
 
 ```python
-response = send_file(file_path="results.csv")
-print("Send File response:", response)
+from one_chat import send_message
+
+response = send_message(message="Hello from OneChat!")
+print("Send Message Response:", response)
 ```
+
+#### Send a File or Image
+Easily share documents or media files.
 
 > [!TIP]
-> You can now send images using the send_file function, making it easier to share media files with your users!
+> You can send images using the `send_file` function, making it easier to share media files with your users!
 
-### Send WebView
 ```python
+from one_chat import send_file
+
+response = send_file(file_path="reports/results.csv")
+print("Send File Response:", response)
+```
+
+#### Send a WebView
+Trigger a webview inside the chat client for interactive web content.
+
+> [!IMPORTANT]
+> The URL must include the full protocol (`http://` or `https://`).
+
+```python
+from one_chat import send_webview
+
 response = send_webview(url="https://google.com/")
-print("Send Webview response:", response)
+print("Send Webview Response:", response)
 ```
 
-> [!IMPORTANT]
-> You need to specify the Protocol (http:// or https://) in the URL
+#### Broadcast Messages
+Send a message to a curated list of user IDs simultaneously.
 
-### Broadcast Messages
-
-To send a message to multiple recipients
-
-> [!IMPORTANT]
-> recipients must be a list of user IDs only !!! cannot be a group ID
+> [!WARNING]
+> Recipients must be a list of **User IDs** only. Group IDs are not supported in broadcasts.
 
 ```python
-response = broadcast_message(message="Hello Multi!", to=["USER_ID_1", "USER_ID_2"])
-print("Send Message Multi response:", response)
+from one_chat import broadcast_message
+
+response = broadcast_message(
+    message="System Maintenance at 12:00 AM",
+    to=["USER_ID_1", "USER_ID_2", "USER_ID_3"]
+)
+print("Broadcast Response:", response)
 ```
 
-### Send Locations
+---
 
-To share a location
+### 3. Rich Messaging
 
+#### Send a Location
 ```python
-response = send_location(latitude=13.7563, longitude=100.5018, address="Bangkok, Thailand")
-print("Send Location Response:", response)
+from one_chat import send_location
+
+response = send_location(
+    latitude=13.7563, 
+    longitude=100.5018, 
+    address="Bangkok, Thailand"
+)
 ```
 
-### Send Stickers
-
-To send a sticker
-
+#### Send a Sticker
 ```python
+from one_chat import send_sticker
+
 response = send_sticker(sticker_id="YOUR_STICKER_ID")
-print("Send Sticker Response:", response)
 ```
 
-### Send Template
-
-To send a template message
+#### Send a Template Message
+Interactive templates allow users to make choices quickly.
+[Read more about templates in the official API docs](https://chat-develop.one.th/develop/docs/template/abouttemplate).
 
 ```python
+from one_chat import send_template
+
 response = send_template(
-        template=[
-            {
-                "image": "https://example.com/image.jpg",
-                "title": "Your Title Here",
-                "detail": "Your Detail Here",
-                "choice": [
-                    {
-                        "label": "Yes",
-                        "type": "text",
-                        "payload": "Yes"
-                    },
-                    # ....
-                ],
-            },
-        ]
-    )
-print("Send Template Response:", response)
+    template=[
+        {
+            "image": "https://example.com/cover.jpg",
+            "title": "Welcome to our service",
+            "detail": "Please select an option below",
+            "choice": [
+                {
+                    "label": "Get Started",
+                    "type": "text",
+                    "payload": "ACTION_START"
+                }
+            ],
+        }
+    ]
+)
 ```
 
-> [!TIP]
-> You can read more about template messages in the OneChat API documentation.
-> [Click here](https://chat-develop.one.th/develop/docs/template/abouttemplate)
-
-### Send Quick Reply
-
-To send a quick reply message
+#### Send Quick Replies
+Prompt users with immediate contextual replies.
+[Read more about quick replies](https://chat-develop.one.th/develop/docs/quickreply/aboutquickreply).
 
 ```python
+from one_chat import send_quickreply
+
 response = send_quickreply(
-        message="Hello, this is a quick reply message!",
-        quick_reply=[
-            {
-                "label": "Register",
-                "type": "text",
-                "message": "I need to register",
-                "payload": "Register",
-            }
-        ],
-    )
-print("Send Quick Reply Response:", response)
+    message="What would you like to do next?",
+    quick_reply=[
+        {
+            "label": "Register Now",
+            "type": "text",
+            "message": "I want to register",
+            "payload": "CMD_REGISTER",
+        }
+    ],
+)
 ```
 
-> [!TIP]
-> You can read more about quick reply messages in the OneChat API documentation.
-> [Click here](https://chat-develop.one.th/develop/docs/quickreply/aboutquickreply)
-
-## Send Image Carousel
-
-To send an image carousel message
+#### Send Image Carousels
+Display a horizontally scrollable list of images and actions.
+[Read more about image carousels](https://chat-develop.one.th/develop/docs/carouselimage/aboutimagecarousel).
 
 ```python
+from one_chat import send_image_carousel
+
 response = send_image_carousel(
-        elements=[
-            {
-                "type": "text",
-                "image": "https://example.com/image1.jpg",
-                "action": "hello",
-                "payload": "Register",
-                "sign": "false",
-                "onechat_token": "false",
-                "button": "click me",
-            }
-        ]
-    )
-print("Send Image Carousel Response:", response)
+    elements=[
+        {
+            "type": "text",
+            "image": "https://example.com/banner.jpg",
+            "action": "hello",
+            "payload": "Register",
+            "sign": "false",
+            "onechat_token": "false",
+            "button": "Click Me",
+        }
+    ]
+)
 ```
 
-> [!TIP]
-> You can read more about image carousel messages in the OneChat API documentation.
-> [Click here](https://chat-develop.one.th/develop/docs/carouselimage/aboutimagecarousel)
+---
 
-## Example
+### 4. Audience Management
 
-Here’s a complete example of how to use the library
+Retrieve lists of friends and groups associated with your bot.
 
 ```python
-from one_chat import *
+from one_chat import fetch_friends_and_groups, list_friend_ids, list_group_ids
+
+# Get complete list of friends and groups
+network = fetch_friends_and_groups()
+
+# Extract just the IDs
+friend_ids = list_friend_ids()
+group_ids = list_group_ids()
+
+print(f"Total Friends: {len(friend_ids)} | Total Groups: {len(group_ids)}")
+```
+
+*(Note: You can pass an explicit `"BOT_ID"` string to these functions to query a specific bot's network.)*
+
+---
+
+## 💻 Complete Example
+
+A comprehensive example script is available here:
+
+```python
+from one_chat import init, send_message, send_location
 
 def main():
-    # Initialize OneChat with your token, recipient, and bot ID
+    # Initialize the client
     init(
-        "YOUR_AUTHORIZATION_TOKEN",
-        "DEFAULT_RECIPIENT_ID",  # Send to (One ID) or (Group ID)
-        "YOUR_BOT_ID"  # Bot ID
+        authorization="YOUR_AUTHORIZATION_TOKEN",
+        to="DEFAULT_RECIPIENT_ID",
+        bot_id="YOUR_BOT_ID"
     )
 
-    # Send a single message
-    resp_msg = send_message(message="Hello One!")
-    print("Send Message response:", resp_msg)
-
-    # Send a file
-    resp_file = send_file(file_path="results.csv")
-    print("Send File response:", resp_file)
-
-    # Send a webview
-    resp_webview = send_webview(url="https://google.com/")
-    print("Send Webview response:", resp_webview)
-
-    # Broadcast a message to multiple users
-    resp_msg_multi = broadcast_message(message="Hello Multi!", to=["USER_ID_1", "USER_ID_2"])
-    print("Send Message Multi response:", resp_msg_multi)
-
-    # Send a location
-    resp_location = send_location(latitude=13.7563, longitude=100.5018, address="Bangkok, Thailand")
-    print("Send Location Response:", resp_location)
-
-    # Send a sticker
-    resp_sticker = send_sticker(sticker_id="YOUR_STICKER_ID")
-    print("Send Sticker Response:", resp_sticker)
-
-    # Send Template
-    resp_template = send_template(
-        template=[
-            {
-                "image": "https://example.com/image.jpg",
-                "title": "Your Title Here",
-                "detail": "Your Detail Here",
-                "choice": [
-                    {
-                        "label": "Yes",
-                        "type": "text",
-                        "payload": "Yes"
-                    },
-                    # ....
-                ],
-            },
-        ]
-    )
-    print("Send Template Response:", resp_template)
-
-    # Send Quick Reply
-    resp_quick_reply = send_quickreply(
-        message="Hello, this is a quick reply message!",
-        quick_reply=[
-            {
-                "label": "Register",
-                "type": "text",
-                "message": "I need to register",
-                "payload": "Register",
-            }
-        ],
-    )
-    print("Send Quick Reply Response:", resp_quick_reply)
-
-    # Send Image Carousel
-    resp_image_carousel = send_image_carousel(
-        elements=[
-            {
-                "type": "text",
-                "image": "https://example.com/image1.jpg",
-                "action": "hello",
-                "payload": "Register",
-                "sign": "false",
-                "onechat_token": "false",
-                "button": "click me",
-            }
-        ]
-    )
-    print("Send Image Carousel Response:", resp_image_carousel)
-
-    # Get a list of friends and groups
-    friends_and_groups = fetch_friends_and_groups() # you can use fetch_friends_and_groups("BOT_ID") to get friends and groups of another bot
-    print("Friends and Groups:", friends_and_groups)
-
-    # Get a list of friends
-    friends = list_all_friends() # you can use list_all_friends("BOT_ID") to get friends of another bot
-    print("Friends:", friends)
-
-    # Get the One ID of a friend
-    one_id = list_friend_ids() # you can use list_friend_ids("BOT_ID") to get one id of a friend of another bot
-    print("One ID of Friend:", one_id)
-
-    # Get a list of groups
-    groups = list_all_groups() # you can use list_all_groups("BOT_ID") to get groups of another bot
-    print("Groups:", groups)
-
-    # Get the group ID of a group
-    group_id = list_group_ids() # you can use list_group_ids("BOT_ID") to get group id of a group of another bot
-    print("Group ID of Group:", group_id)
+    # Send a greeting
+    send_message(message="Welcome to OneChat!")
+    
+    # Share a location
+    send_location(latitude=13.7563, longitude=100.5018, address="Bangkok")
 
 if __name__ == "__main__":
     main()
 ```
 
-## Contributing
+For more runnable examples, check the [`examples/`](./examples/) directory in the repository:
+- `examples/quickstart.py` — Send a basic text message.
+- `examples/broadcast.py` — Broadcast to a list of users.
 
-Contributions are welcome! Please see `CONTRIBUTING.md` and `SECURITY.md`. Run checks locally with:
+---
 
-```
+## 🤝 Contributing
+
+We welcome contributions from the community! 
+
+Please read our [Contributing Guide](CONTRIBUTING.md) to get started. Be sure to also review our [Code of Conduct](CODE_OF_CONDUCT.md) and [Security Policy](SECURITY.md).
+
+To run local checks before submitting a PR:
+```bash
 ruff check .
 black --check .
 mypy one_chat
 pytest
 ```
 
-## Examples
+---
 
-See runnable examples in `examples/`:
-- `examples/quickstart.py` — send a text message (uses env `ONECHAT_TOKEN`, `ONECHAT_TO`, `ONECHAT_BOT_ID`)
-- `examples/broadcast.py` — broadcast to multiple users (uses env `ONECHAT_TOKEN`, `ONECHAT_BOT_ID`, `ONECHAT_USERS`)
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
